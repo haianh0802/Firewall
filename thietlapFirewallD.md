@@ -187,9 +187,41 @@ Kiểm tra lại
 
 ![image](https://user-images.githubusercontent.com/101684058/166656936-c85649a4-982f-486a-b224-1d656279aecc.png)
 
+Khi đã có zone thiết lập riêng, bạn có thể cấu hình như các zone thông thường: thiết lập mặc định, thêm quy tắc… Ví dụ:
+
+`firewall-cmd --zone=publicweb --add-service=ssh --permanent`
+
+`firewall-cmd --zone=publicweb --add-service=http --permanent`
+
+` firewall-cmd --zone=publicweb --add-service=https --permanent`
+
 ![image](https://user-images.githubusercontent.com/101684058/166657014-5e121f36-6bb6-432b-a0f5-d760c7d9fb25.png)
 
+2. Định nghĩa services riêng trên FirewallD
+
+Việc mở port trên tường lửa rất dễ dàng nhưng lại khiến bạn gặp khó khăn khi ghi nhớ các port và các services tương ứng. Vì vậy, khi có một services mới thêm vào hệ thống, bạn sẽ có 2 phương án:
+
+Mở Port của services đó trên FirewallD
+
+Tự định nghĩa services đó trên FirewallD
+
+– Tạo file định nghĩa riêng từ file chuẩn ban đầu
+
+`cp /usr/lib/firewalld/services/ssh.xml /etc/firewalld/services/hocvps-admin.xml`
+
+– Chỉnh sửa để định nghĩa servies trên FirewallD
+
+`nano /etc/firewalld/services/hocvps-admin.xml`
+
 ![image](https://user-images.githubusercontent.com/101684058/166658315-380c4d1b-7cc7-48e4-8794-555727d45d10.png)
+
+– Lưu lại và khởi động lại FirewallD
+
+`firewall-cmd --reload`
+
+– Kiểm tra lại danh sách services:
+
+`firewall-cmd --get-services`
 
 ![image](https://user-images.githubusercontent.com/101684058/166658397-e9147636-d930-4c04-8206-a5b5bd752bd2.png)
 
