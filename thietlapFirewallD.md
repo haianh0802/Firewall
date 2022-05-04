@@ -1,15 +1,89 @@
+## Cài đặt FirewallD
+
+– FirewallD được cài đặt mặc định trên CentOS 7. Cài đặt nếu chưa có:
+
+` yum install firewalld`
+
+– Khởi động FirewallD:
+
+`systemctl start firewalld`
+
+– Kiểm tra tình trạng hoạt động
+
+`systemctl status firewalld`
 
 ![image](https://user-images.githubusercontent.com/101684058/166649603-085f4764-76ea-4a79-9af1-c04b55bd7586.png)
 
+`systemctl is-active firewalld`
+
+ `firewall-cmd --state`
+
+– Thiết lập FirewallD khởi động cùng hệ thống
+
+`systemctl enable firewalld`
+
+Kiểm tra lại :
+
+`systemctl is-enabled firewalld`
+
 ![image](https://user-images.githubusercontent.com/101684058/166649880-686ccc91-5383-48bf-9328-740ce8a90017.png)
+
+Ban đầu, bạn không nên cho phép FirewallD khởi động cùng hệ thống cũng như thiết lập Permanent, tránh bị khóa khỏi hệ thống nếu thiết lập sai. Chỉ thiết lập như vậy khi bạn đã hoàn thành các quy tắc tường lửa cũng như test cẩn thận.
+
+– Khởi động lại
+
+`systemctl restart firewalld`
+
+` firewall-cmd --reload`
 
 ![image](https://user-images.githubusercontent.com/101684058/166650060-d67a185e-65aa-4691-9499-2dfc488e7fb6.png)
 
+– Dừng và vô hiệu hóa FirewallD
+
+`systemctl stop firewalld`
+
+`systemctl disable firewalld`
+
+ ## Cấu hình FirewallD
+ 
+1. Thiết lập các Zone
+
+– Liệt kê tất cả các zone trong hệ thống
+
+`firewall-cmd --get-zones`
+
 ![image](https://user-images.githubusercontent.com/101684058/166655591-50e5e38a-7a8e-410a-baff-d41ff116ce1f.png)
+
+– Kiểm tra zone mặc định
+
+`firewall-cmd --get-default-zone`
 
 ![image](https://user-images.githubusercontent.com/101684058/166655658-df2f5ea6-51a9-4c6f-9867-e06d6872f373.png)
 
+– Kiểm tra zone active (được sử dụng bởi giao diện mạng)
+
+Vì FirewallD chưa được thiết lập bất kỳ quy tắc nào nên zone mặc định cũng đồng thời là zone duy nhất được kích hoạt, điều khiển mọi luồng dữ liệu.
+
+`firewall-cmd --get-active-zones`
+
+
 ![image](https://user-images.githubusercontent.com/101684058/166655700-9b629640-4caf-4ca3-aeb7-8a8bb97b6c4f.png)
+
+– Thay đổi zone mặc định, ví dụ thành home:
+
+ ` firewall-cmd --set-default-zone=home`
+ 
+ 2. Thiết lập các quy tắc
+
+Trước khi thiết lập các quy tắc mới, hãy cùng HocVPS kiểm tra các quy tắc hiện tại:
+
+– Liệt kê toàn bộ các quy tắc của các zones:
+
+`firewall-cmd --list-all-zones`
+
+– Liệt kê toàn bộ các quy tắc trong zone mặc định và zone active
+
+`firewall-cmd --list-all`
 
 ![image](https://user-images.githubusercontent.com/101684058/166655912-6ea48fef-6d61-4c7f-89de-06abdb5c09c8.png)
 
