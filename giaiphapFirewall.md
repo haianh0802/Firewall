@@ -59,27 +59,44 @@ Tường lửa doanh nghiệp là một thiết bị phần cứng hay phần m�
 ##### 2. Sản phẩm giúp giải quyết bài toán về bảo mật của doanh nghệp
 Các xu hướng tấn công hiện nay của Hacker ngày càng đa dạng mà các cá nhân hay các doanh nghiệp vừa và nhỏ,.. cần phải dè chừng, cảnh giác cao độ như là:
 ●      Tấn công AL và công nghệ học máy qua những thiết bị được cài sẵn mã độc.
+
 ●      Ransomeware vẫn tiếp tục tăng mạnh các cuộc tấn công, tiêu biểu như vụ việc WannaCry và Petya.
+
 ●      Tấn công lừa đảo qua Email và mạng xã hội bằng cách gửi file, link chứa mã độc cho người dùng và yêu cầu họ click vào đường dẫn.
+
 ●      IoT và Big Data Vấn đề đang gặp phải của IoT là vẫn đang thiếu các tính năng bảo mật cơ bản, hoặc cấu hình chưa đúng,… Hình thức tấn công mạng nhằm vào Big Data như Phishing và Dos đang gia tăng về quy mô, số lượng và kỹ thuật.
+
 ●      Tấn công qua lỗ hổng phàn mềm từ bên thứ 3: Các hacker cài backdoor vào đó và bắt đầu thu thập thông tin hoặc đánh cắp dữ liệu.
+
 ●      Thiết bị router và modem bị tấn công nhiều hơn: Dựa vào điểm yếu của đường truyền mạng, hacker sẽ chèn mã độc vào thiết bị.
+
 ●      Tấn công vào trang Web có bảo mật kém
+
 ●      Các bản vá lỗi, các ứng dụng, phần mềm mà người dùng cập nhật lại chứa lỗ hổng để các hacker tiếp cận. Người dùng nên quan tâm và kiểm tra thường xuyên để bảo mật cao.
 
 ##### 3. Những tính năng chính trên Fortigate của Fortinet
 ​Nền tảng phần cứng độc quyền FortiASIC đem lại sự ổn định, tốc độ cao và đầy đủ các tính năng mà một hệ thống bảo mật thế hệ mới cần có.
 
 –        Thiết bị tích hợp tính năng chống Virus, quét Virus ra thời gian thực qua các con đường thu điện tử (SMTP, POP3, IMAP) chuyển file, web mà không làm chậm tốc độ mạng.
+
 –        Đã được chứng nhận bởi ICSA về Hệ thống quản lý tốt chống virus, Firewall, VPN. Khi phát hiện ra đường dẫn Virus có thể xóa, quét tự động, cách ly để xử lý, cảnh báo người dùng.
+
 –        Chống thư rác không liên quan đến các từ khóa mà doanh nghiệp cài đặt trong hệ thống.
+
 –        Đảm bảo băng thông: FortiOS phân biệt các loại dữ liệu khác nhau, thiết lập được các chính sách đảm bảo chống tắc nghẽn đồng thời ưu tiên cho các ứng dụng đòi hỏi thời gian đáp ứng cao như VoIP
+
 –        Hệ thống lọc những trang Web an toàn, giao diện đơn giản dễ sử dụng.
+
 –        Hệ thống phát hiện, phòng ngừa truy cập trái phép.
+
 –        Tính năng điều khiển ứng dụng
+
 –        Hệ thống cấp thoát dữ liệu.
+
 –        Thiết bị hỗ trợ khả năng dự phòng nâng cấp hệ thống HA, giúp cho hệ thống luôn hoạt động ở chế độ dự phòng, đảm bảo cho hệ thống hoạt động bình thường nếu như thiết bị xảy ra sự cố.
+
 –        Dòng cao cấp có thể xử lý những lưu lượng cao lên đến hàng GB
+
 –        Luôn cập nhật virus, trang web, file, các cách thức tấn công mới thông qua các trung tâm cập nhật trên toàn cầu.
 
 
