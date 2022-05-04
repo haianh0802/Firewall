@@ -150,16 +150,40 @@ Trong trường hợp bạn thích quản lý theo cách truyền thống qua Po
 Mở 1 dải port
 
 `firewall-cmd --zone=public --add-port=4990-5000/tcp`
+
 `firewall-cmd --zone=public --add-port=4990-5000/tcp --permanent`
 
 ![image](https://user-images.githubusercontent.com/101684058/166656566-3cbf2d08-4ce7-4ca4-a919-c007f580a30d.png)
 
+Kiểm tra lại
 
+`firewall-cmd --zone=public --list-ports`
 
 ![image](https://user-images.githubusercontent.com/101684058/166656719-b47059ab-4204-4b4c-8a95-a5d96670765c.png)
 
+– Đóng Port với tham số --remove-port:
+
+`firewall-cmd --zone=public --remove-port=9999/tcp`
+
+`firewall-cmd --zone=public --remove-port=9999/tcp --permanent`
+
+### Cấu hình nâng cao
+
+1. Tạo Zone riêng
+
+Mặc dù, các zone có sẵn là quá đủ với nhu cầu sử dụng, bạn vẫn có thể tạo lập zone của riêng mình để mô tả rõ ràng hơn về các chức năng của chúng. Ví dụ, bạn có thể tạo riêng một zone cho webserver publicweb hay một zone cấu hình riêng cho DNS trong mạng nội bộ privateDNS. Bạn cần thiết lập Permanent khi thêm một zone.
+
+`firewall-cmd --permanent --new-zone=publicweb`
+
+`firewall-cmd --permanent --new-zone=privateDNS`
+
+`firewall-cmd --reload`
 
 ![image](https://user-images.githubusercontent.com/101684058/166656873-d5eb07aa-df0e-42d0-b786-4d6f300537fe.png)
+
+Kiểm tra lại
+
+`firewall-cmd --get-zones`
 
 ![image](https://user-images.githubusercontent.com/101684058/166656936-c85649a4-982f-486a-b224-1d656279aecc.png)
 
