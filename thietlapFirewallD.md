@@ -87,22 +87,74 @@ Trước khi thiết lập các quy tắc mới, hãy cùng HocVPS kiểm tra c�
 
 ![image](https://user-images.githubusercontent.com/101684058/166655912-6ea48fef-6d61-4c7f-89de-06abdb5c09c8.png)
 
+Kết quả cho thấy public là zone mặc định đang được kích hoạt, liên kết với card mạng eth0 và cho phép DHCP cùng SSH.
+
+– Liệt kê toàn bộ các quy tắc trong một zone cụ thể, ví dụ home
+
+`firewall-cmd --zone=home --list-all`
 
 ![image](https://user-images.githubusercontent.com/101684058/166655983-1f8f8671-5b28-49cc-ada3-5a3bb32cbdc8.png)
 
+– Liệt kê danh sách services/port được cho phép trong zone cụ thể:
+
+`firewall-cmd --zone=public --list-services`
+
+`firewall-cmd --zone=public --list-ports`
+
 ![image](https://user-images.githubusercontent.com/101684058/166656040-6c2bc27a-ebf8-41ec-b654-8986ab3ea3b5.png)
+
+a. Thiết lập cho Service
+
+Đây chính là điểm khác biệt của FirewallD so với Iptables – quản lý thông qua các services. Việc thiết lập tường lửa đã trở nên dễ dàng hơn bao giờ hết – chỉ việc thêm các services vào zone đang sử dụng.
+
+– Đầu tiên, xác định các services trên hệ thống:
+
+`firewall-cmd --get-services`
 
 ![image](https://user-images.githubusercontent.com/101684058/166656107-0eb62ae7-7d57-4d5c-b137-feea02cd0a07.png)
 
+– Thiết lập cho phép services trên FirewallD, sử dụng --add-service:
+
+` firewall-cmd --zone=public --add-service=http`
+
+`firewall-cmd --zone=public --add-service=http --permanent`
+
 ![image](https://user-images.githubusercontent.com/101684058/166656246-f523f4f5-2227-4ae7-87cb-85a3a17079d1.png)
+
+Ngay lập tức, zone “public” cho phép kết nối HTTP trên cổng 80. Kiểm tra lại
+
+`firewall-cmd --zone=public --list-services`
 
 ![image](https://user-images.githubusercontent.com/101684058/166656290-35fcabbf-2218-473e-ba0c-16465b8d119b.png)
 
+– Vô hiệu hóa services trên FirewallD, sử dụng --remove-service:
+
+`firewall-cmd --zone=public --remove-service=http`
+
+`firewall-cmd --zone=public --remove-service=http --permanent`
+
 ![image](https://user-images.githubusercontent.com/101684058/166656351-86821855-23ee-41b8-a544-027037c3b641.png)
+
+b. Thiết lập cho Port
+
+Trong trường hợp bạn thích quản lý theo cách truyền thống qua Port, FirewallD cũng hỗ trợ bạn điều đó.
+
+– Mở Port với tham số --add-port:
+
+`firewall-cmd --zone=public --add-port=9999/tcp`
+
+`firewall-cmd --zone=public --add-port=9999/tcp --permanent`
 
 ![image](https://user-images.githubusercontent.com/101684058/166656463-0b0d108c-eda7-4cac-a72e-d1fccf479b56.png)
 
+Mở 1 dải port
+
+`firewall-cmd --zone=public --add-port=4990-5000/tcp`
+`firewall-cmd --zone=public --add-port=4990-5000/tcp --permanent`
+
 ![image](https://user-images.githubusercontent.com/101684058/166656566-3cbf2d08-4ce7-4ca4-a919-c007f580a30d.png)
+
+
 
 ![image](https://user-images.githubusercontent.com/101684058/166656719-b47059ab-4204-4b4c-8a95-a5d96670765c.png)
 
