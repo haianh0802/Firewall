@@ -1,7 +1,7 @@
 # Cài đặt CSF Firewall trên CentOS 7
 
 1. Bước 1: Dừng và vô hiệu hóa tường lửa.
-2. 
+
 Để dừng và vô hiệu hoá Firewalld trên centos các bạn sử dụng 2 lệnh sau
 
 `systemctl disable firewalld `
@@ -11,7 +11,7 @@
 ![image](https://user-images.githubusercontent.com/101684058/166621367-be81483f-ae9b-4a3c-bc61-faed9e849fab.png)
 
 2. Bước 2: Cài đặt iptables.
-3. 
+
 Sau khi đã dừng và vô hiệu hoá Firewalld chúng ta tiến hành cài đặt ibtables
 
 `yum -y install iptables-services`
