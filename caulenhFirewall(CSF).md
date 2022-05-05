@@ -121,3 +121,40 @@
 `csf -td ip ttl [-p port] [-d direction] [comment]`
 
 `csf --tempdeny ip ttl [-p port] [-d direction] [comment]`
+
+
+17. Liệt kê các IP đang nằm trong danh sách IP tạm thời bị chặn hoặc tạm thời cho phép
+
+`csf -t `
+
+`csf --temp`
+
+18. Gỡ bỏ IP khỏi danh sách IP tạm thời bị chặn hoặc tạm thời cho phép
+
+`csf -tr ip`
+
+`csf -temprm ip`
+
+19. Xoá toàn bộ danh sách IP đang nằm trong danh sách tạm thời
+
+`csf -tf`
+
+`csf --tempf`
+
+20. Xem phiên bản CSF hiện tại trên hệ thống
+
+`csf -v`
+
+`csf --version`
+
+21. Kiểm tra phiên bản cập nhật, nhưng không tiến hành cập nhật
+
+`csf -c`
+
+`csf --check`
+
+22. Danh sách các options hỗ trợ
+
+`csf -h`
+
+`csf --help`
