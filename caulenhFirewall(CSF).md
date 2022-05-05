@@ -153,8 +153,14 @@
 
 `csf --check`
 
+![image](https://user-images.githubusercontent.com/101684058/166897625-82c1c0b5-1023-490e-bbe3-8f4653aeb877.png)
+
+
 22. Danh sách các options hỗ trợ
 
 `csf -h`
 
 `csf --help`
+
+![image](https://user-images.githubusercontent.com/101684058/166897809-67cdef88-379f-47e9-ac03-37c82caae86b.png)
+
