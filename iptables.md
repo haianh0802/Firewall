@@ -59,3 +59,156 @@ Hầu hết các trường hợp, bạn sẽ sử dụng thường xuyên chain 
 - raw: table này xử lý packet raw chưa qua xử lý như tên gọi của nó. Chủ yếu là để theo dõi trạng thái kết nối. Chúng ta sẽ thấy các ví dụ về điều này bên dưới khi muốn cho các packet thành công từ kết nối SSH.
 
 - security: có nhiệm vụ đánh dấu những gói tin có liên quan đến context của SELinux, nó giúp cho SELinux hoặc các thành phần khác hiểu được context SELinux và xử lý gói tin.
+
+### Các tùy chọn để chỉ định thông số IPtables
+
+- Chỉ định tên table: -t ,
+
+- Chỉ định loại giao thức: -p ,
+
+- Chỉ định card mạng vào: -i ,
+
+- Chỉ định card mạng ra: -o ,
+
+- Chỉ định địa chỉ IP nguồn: -s <địa_chỉ_ip_nguồn>,
+
+- Chỉ định địa chỉ IP đích: -d <địa_chỉ_ip_đích>, tương tự như –s.
+ 
+ - Chỉ định cổng nguồn: –sport ,
+
+- Chỉ định cổng đích: –dport , tương tự như –sport
+
+### Các tùy chọn để thao tác với chain trong IPtables 
+
+- Tạo chain mới: IPtables -N
+
+- Xóa hết các rule đã tạo trong chain: IPtables -X
+
+- Đặt chính sách cho các chain `built-in` (INPUT, OUTPUT & FORWARD): IPtables -P , ví dụ: IPtables -P INPUT ACCEPT để chấp nhận các packet vào chain INPUT
+
+- Liệt kê các rule có trong chain: IPtables -L
+
+- Xóa các rule có trong chain (flush chain): IPtables -F
+
+- Reset bộ đếm packet về 0: IPtables -Z
+
+### Các tùy chọn để thao tác với rule trong IPtables 
+
+- Thêm rule: -A (append)
+
+- Xóa rule: -D (delete)
+
+- Thay thế rule: -R (replace)
+
+- Chèn thêm rule: -I (insert)
+
+## Cài đặt Iptables trên Centos 7
+
+– Iptables thường được cài đặt mặc định trong hệ thống. Nếu chưa được cài đặt:
+
+`yum install iptables`
+
+CentOS 7 sử dụng FirewallD làm tường lửa mặc định thay vì Iptables. Nếu bạn muốn sử dụng Iptables thực hiện:
+
+ `systemctl mask firewalld`
+ 
+`systemctl enable iptables`
+
+`systemctl enable ip6tables`
+
+`systemctl stop firewalld`
+
+`systemctl start iptables`
+
+`systemctl start ip6tables` 
+
+![image](https://user-images.githubusercontent.com/101684058/167084184-dcc719ef-3f1a-4c14-beae-95f4629318ad.png)
+
+– Kiểm tra Iptables đã được cài đặt trong hệ thống:
+
+ `rpm -q iptables`
+
+`iptables --version`
+
+![image](https://user-images.githubusercontent.com/101684058/167084509-8eb3001c-cbcb-4506-9c2d-8664cad04cf4.png)
+
+– Check tình trạng của Iptables, cũng như cách bật tắt services trên CentOS
+
+`service iptables status`
+
+![image](https://user-images.githubusercontent.com/101684058/167084682-4d846d65-bbd8-4515-ab24-b799702df2a6.png)
+
+`service iptables start`
+
+`service iptables stop`
+
+`service iptables restart`
+
+![image](https://user-images.githubusercontent.com/101684058/167084824-654db9f1-5685-45a2-9a28-3a4307ac76f0.png)
+
+– Khởi động Iptables cùng hệ thống
+
+`chkconfig iptables on`
+
+##  Các nguyên tắc áp dụng trong Iptables
+
+Để bắt đầu, bạn cần xác định các services muốn đóng/mở và các port tương ứng.
+
+Liệt kê các quy tắc hiện tại:
+
+`iptables -L`
+
+![image](https://user-images.githubusercontent.com/101684058/167085762-388b8bd3-2f21-43cf-8ea4-2be6687b732e.png)
+
+Cột 1: TARGET hành động sẽ được áp dụng cho mỗi quy tắc
+
+Accept: gói dữ liệu được chuyển tiếp để xử lý tại ứng dụng cuối hoặc hệ điều hành
+
+Drop: gói dữ liệu bị chặn, loại bỏ
+
+Reject: gói dữ liệu bị chặn, loại bỏ đồng thời gửi một thông báo lỗi tới người gửi
+
+Cột 2: PROT (protocol – giao thức) quy định các giao thức sẽ được áp dụng để thực thi quy tắc, bao gồm all, TCP hay UDP. Các ứng dụng SSH, FTP, sFTP… đều sử dụng giao thức TCP.
+
+Cột 4, 5: SOURCE và DESTINATION địa chỉ của lượt truy cập được phép áp dụng quy tắc.
+
+## Cách sử dụng Iptables để mở port VPS
+1. Mở port SSH
+2. 
+Để truy cập VPS qua SSH, bạn cần mở port SSH 22. Bạn có thể cho phép kết nối SSH ở bất cứ thiết bị nào, bởi bất cứ ai và bất cứ dâu.
+
+`iptables -I INPUT -p tcp -m tcp --dport 22 -j ACCEPT`
+
+![image](https://user-images.githubusercontent.com/101684058/167090087-4db2514b-1ad0-4a6a-929c-e79a9c1855ee.png)
+
+2. Mở port Web Server
+
+Để cho phép truy cập vào webserver qua port mặc định 80 và 443:
+
+`iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT`
+
+`iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT`
+
+3. Mở port Mail
+
+– Để cho phép user sử dụng SMTP servers qua port mặc định 25 và 465:
+
+`iptables -I INPUT -p tcp -m tcp --dport 25 -j ACCEPT`
+
+`iptables -I INPUT -p tcp -m tcp --dport 465 -j ACCEPT`
+
+– Để user đọc email trên server, bạn cần mở port POP3 (port mặc định 110 và 995)
+
+`iptables -A INPUT -p tcp -m tcp --dport 110 -j ACCEPT`
+
+`iptables -A INPUT -p tcp -m tcp --dport 995 -j ACCEPT`
+
+4. Chặn 1 IP truy cập
+
+`iptables -A INPUT -s IP_ADDRESS -j DROP`
+
+Cuối cùng, bạn cần lưu lại các thiết lập tường lửa Iptables nếu không các thiết lập sẽ mất khi bạn reboot hệ thống. 
+
+`service iptables save`
+
+![image](https://user-images.githubusercontent.com/101684058/167090976-019e214a-7669-4d8f-b4f4-83954e7ebe89.png)
