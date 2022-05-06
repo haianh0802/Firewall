@@ -129,3 +129,43 @@ sudo ufw deny <port>/<optional: protocol>
   
 Để quản lý các quy tắc trên UFW của bạn, bạn có thể liệt kê chúng ra theo dạng menu danh sách. Để thực hiện được bạn sử dụng lệnh sau, màn hình hiển thị các quy tắc kèm số thứ tự và bạn sẽ chọn các số thứ tự hoặc tên quy tắc để xoá bỏ.
 
+  `sudo ufw status numbered`
+  
+  **Cho phép phạm vi cổng**
+  
+UFW cho phép bạn truy cập vào phạm vi cổng kết nối thay vì bạn mở cho từng cổng riêng biệt. Và khi bạn cho phép phạm vi cổng bạn cần xác định phạm vi cổng thuộc giao thức TCP hay là UDP để mở nhé.
+
+  ![image](https://user-images.githubusercontent.com/101684058/167112072-7225cce8-9723-481c-9700-9dfa44c3b16d.png)
+
+  **Đóng phạm vi cổng**
+  
+  ![image](https://user-images.githubusercontent.com/101684058/167112377-e6403605-c062-4621-920f-648a686bf386.png)
+
+  **Cho phép và từ chối IP**
+  
+- Cho phép IP truy cập
+  
+Để cho phép, mở IP bạn sử dụng cú pháp như sau.
+  
+  `sudo ufw allow from $Your_IP`
+  
+  ![image](https://user-images.githubusercontent.com/101684058/167112524-cd60512d-8667-4acd-8f8f-96628f9881b2.png)
+
+  - Từ chối IP
+  
+Để từ chối IP truy cập bạn sử dụng cú pháp như sau.
+
+`sudo ufw deny from $Your_IP`
+  
+  ![image](https://user-images.githubusercontent.com/101684058/167112696-29743e79-acbe-4641-9376-6ebd88e7b4b1.png)
+
+  
+  **Bật kích hoạt IPv6** 
+  
+Nếu bạn sử dụng IPv6 trên VPS của mình, bạn cần đảm bảo rằng IPv6 được bật trong UFW. Để thực hiện bạn cần mởi file cấu hình ufw /etc/default/ufw và điều chỉnh như sau.
+  
+  `sudo nano /etc/default/ufw`
+  
+  ![image](https://user-images.githubusercontent.com/101684058/167112904-ecd6bd89-4a90-4507-8003-9c99696b1982.png)
+  
+  
