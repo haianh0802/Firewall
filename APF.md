@@ -65,3 +65,7 @@ Như vậy, VPS của bạn có một bức tường lửa giúp chặn những 
 
 ![image](https://user-images.githubusercontent.com/101684058/167248652-528eba45-9b30-4136-8b05-b25ec16ad77d.png)
 
+`apf -st` | Trạng thái hiện tại của APF Firewall
+
+![image](https://user-images.githubusercontent.com/101684058/167248876-0a15c6c6-d701-4004-b9c2-c850a8b18d01.png)
+
